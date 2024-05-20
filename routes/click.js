@@ -17,6 +17,7 @@ router.post('/', async (req, res, next) => {
 
 router.post('/deleteallclicks', async (req, res, next) => {
   Click.remove({});
+  req.app.ws.emit('delete-all-clicks');
   return res.json({ message: 'all clicks removed' });
 });
 
