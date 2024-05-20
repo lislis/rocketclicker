@@ -2,10 +2,7 @@
  import { RouterLink, RouterView } from 'vue-router'
  import { useClickStore } from '@/stores/click';
 
- import MainHead from '@/components/MainHead.vue';
-
  export default {
-     components: { MainHead },
      inject: ['socketServer', 'apiEndpoint', 'socket'],
      mounted() {
          this.socket.on('connect', (e) => {
@@ -51,8 +48,7 @@
          store.fetchUsers();
          store.fetchGame();
          return { store };
-     },
-
+     }
  }
 
 </script>

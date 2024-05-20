@@ -64,7 +64,7 @@ export const useClickStore = defineStore('clicks', {
       this.game = game;
     },
     addUser(user) {
-      this.user.push(user);
+      this.users.push(user);
     },
     rmUser(user) {
       let index = this.user.findIndex(x => x._id === user._id);
