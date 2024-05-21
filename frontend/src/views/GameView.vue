@@ -1,8 +1,10 @@
 <script setup>
+ import { useEventListener, whenever } from '@vueuse/core'
  import { Application, Loader, onTick } from "vue3-pixi";
- import { reactive } from 'vue'
+ import { reactive, ref } from 'vue'
 
- import Rocket from '@/components/Rocket.vue'
+ import Loop from '@/components/Loop.vue'
+ import Waiting from '@/components/Waiting.vue'
 
  const width = (window.innerWidth);
  const height = (window.innerHeight);
@@ -14,8 +16,11 @@
      rocketEmpty: '/textures/rocket-empty.png'
  }
 
- const position = reactive({ x: 80, y: 150 })
+ const gameState = reactive({});
 
+ function levelup() {
+     console.log('levelup')
+ }
 
 </script>
 <template>
@@ -31,11 +36,9 @@
             </template>
             <!-- component with nested async dependencies -->
             <template #default="{ textures }">
-                <text :x="20" :y="20"
-                      :style="{ fill: 'white' }">Up and to the right!</text>
+                <Waiting v-if="!gameState.active" />
+                <Loop v-else @levelup="levelup" />
 
-                <Rocket v-model:x="position.x" v-model:y="position.y"
-                      @die="gameover = true" />
             </template>
         </Loader>
     </Application>

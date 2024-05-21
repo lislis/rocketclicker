@@ -1,6 +1,6 @@
 <script setup>
- import { onKeyDown, useEventListener, whenever } from '@vueuse/core'
- import { SCALE_MODES, Texture } from 'pixi.js'
+ import { useEventListener, whenever } from '@vueuse/core'
+ import { Texture } from 'pixi.js'
  import { ref, useModel, computed } from 'vue'
  import { onTick } from 'vue3-pixi'
 
@@ -23,32 +23,28 @@
      y.value += velocity.value * dt
      x.value += velocityX.value * dt
 
-     // apply gravity
      velocity.value += gravity * dt
      velocityX.valuue += friction * dt
  })
 
  function jump() {
-     // jump upwards when clicked, negative velocity indicates upward direction
      velocity.value = -8
      velocityX.value = 1
  }
 
  useEventListener('click', jump)
 
- // when hitting the ground, player dies
+ // when hitting the ground
  whenever(
      () => y.value > window.innerHeight - 40,
      () => {
          y.value = window.innerHeight - 40
          velocity.value = 0
          velocityX.value = 0;
-         //emit('die')
-         //remove()
      },
  )
 
- // when hitting the ceiling, player bounces back
+ // when hitting the ceiling
  whenever(
      () => y.value < 10,
      () => {
