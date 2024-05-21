@@ -1,7 +1,7 @@
 <script setup>
  import { useEventListener, whenever } from '@vueuse/core'
  import { Application, Loader, onTick } from "vue3-pixi";
- import { reactive, ref } from 'vue'
+ import { reactive, ref, watch } from 'vue'
  import { storeToRefs } from 'pinia'
  import { useClickStore } from '@/stores/click'
  import Loop from '@/components/Loop.vue'
@@ -9,7 +9,6 @@
 
  const store = useClickStore();
  const { getGame, getUsers, getClicks } = storeToRefs(store)
-
 
  const width = (window.innerWidth);
  const height = (window.innerHeight);
@@ -24,6 +23,10 @@
  function levelup() {
      console.log('levelup')
  }
+
+ watch('getGame', (mew) => {
+     console.log(mew)
+ })
 
 </script>
 <template>
