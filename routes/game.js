@@ -15,11 +15,13 @@ router.post('/', async (req, res, next) => {
   return res.json(g);
 });
 
-router.delete('/:gameId', async (req, res, next) => {
-  const g = await Game.findOneAndDelete({_id: req.params.gameId });
-  req.app.ws.emit('delete-game', { message: g });
-  return res.json(g);
+router.delete('/', async (req, res, next) => {
+  await Game.findOneAndDelete({});
+  //const g = await Game.findOneAndDelete({_id: req.params.gameId });
+  req.app.ws.emit('delete-game');
+  return res.json({ message: "all deleted"});
 });
+
 
 router.put('/:gameId', async (req, res, next) => {
   const g = await Game.findOneAndUpdate({ _id: req.params.gameId },

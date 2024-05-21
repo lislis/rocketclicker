@@ -1,23 +1,19 @@
 <script>
  import { RouterLink, RouterView } from 'vue-router'
  import { useClickStore } from '@/stores/click';
+ import { wrappedFetch } from '@/utils';
 
  export default {
      inject: ['socketServer', 'apiEndpoint', 'socket'],
      mounted() {
          this.socket.on('connect', (e) => {
-             fetch(`${this.apiEndpoint}/users`, {
-                 method: 'POST',
-                 headers: {
-                     "Content-Type": "application/json",
-                     Accept: 'application/json'
-                 },
-                 referrerPolicy: "no-referrer",
-                 body: JSON.stringify({socket: this.socket.id})
-             }).then(d => d.json())
-               .then(d => {
-                   this.store.setMe(d);
-               });
+             wrappedFetch(`${this.apiEndpoint}/users`,
+                          'POST',
+                          JSON.stringify({socket: this.socket.id})
+             ).then(d => d.json())
+              .then(d => {
+                  this.store.setMe(d);
+              });
 
              this.socket.on('new-click', (evt) => {
                  this.store.addClick(evt.message);

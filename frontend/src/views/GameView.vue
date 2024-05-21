@@ -2,9 +2,14 @@
  import { useEventListener, whenever } from '@vueuse/core'
  import { Application, Loader, onTick } from "vue3-pixi";
  import { reactive, ref } from 'vue'
-
+ import { storeToRefs } from 'pinia'
+ import { useClickStore } from '@/stores/click'
  import Loop from '@/components/Loop.vue'
  import Waiting from '@/components/Waiting.vue'
+
+ const store = useClickStore();
+ const { getGame, getUsers, getClicks } = storeToRefs(store)
+
 
  const width = (window.innerWidth);
  const height = (window.innerHeight);
@@ -15,8 +20,6 @@
      rocketFire: '/textures/rocket.png',
      rocketEmpty: '/textures/rocket-empty.png'
  }
-
- const gameState = reactive({});
 
  function levelup() {
      console.log('levelup')
@@ -36,7 +39,7 @@
             </template>
             <!-- component with nested async dependencies -->
             <template #default="{ textures }">
-                <Waiting v-if="!gameState.active" />
+                <Waiting v-if="!getGame" />
                 <Loop v-else @levelup="levelup" />
 
             </template>

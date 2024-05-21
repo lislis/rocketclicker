@@ -46,7 +46,7 @@ export const useClickStore = defineStore('clicks', {
       let apiEndpoint = inject('apiEndpoint');
       fetch(`${apiEndpoint}/games`)
         .then(d => d.json())
-        .then(d => this.game = d);
+        .then(d => this.game = d[0]);
     },
     addClick(click) {
       this.clicks.push(click);
@@ -57,7 +57,7 @@ export const useClickStore = defineStore('clicks', {
     newGame(game) {
       this.game = game;
     },
-    rmGame(game) {
+    rmGame() {
       this.game = {};
     },
     updateGame(game) {
