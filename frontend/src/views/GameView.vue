@@ -20,14 +20,6 @@
      rocketEmpty: '/textures/rocket-empty.png'
  }
 
- function levelup() {
-     console.log('levelup')
- }
-
- watch('getGame', (mew) => {
-     console.log(mew)
- })
-
 </script>
 <template>
     <Application :width="width" :height="height"
@@ -36,15 +28,17 @@
         <Loader :resources="images">
             <!-- loading state via #fallback slot -->
             <template #fallback>
-                <text :anchor="0.5" :x="120" :y="120" :style="{ fill: 'white' }">
+                <text :anchor="0.5" :x="120" :y="120"
+                      :style="{ fill: 'white' }">
                     Loading...
                 </text>
             </template>
             <!-- component with nested async dependencies -->
             <template #default="{ textures }">
                 <Waiting v-if="!getGame" />
-                <Loop v-else @levelup="levelup" />
-
+                <template v-else>
+                    <Loop />
+                </template>
             </template>
         </Loader>
     </Application>

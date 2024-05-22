@@ -1,8 +1,10 @@
 <script setup>
  import { useEventListener, whenever } from '@vueuse/core'
  import { Texture } from 'pixi.js'
- import { ref, useModel, computed } from 'vue'
+ import { ref, useModel, computed, inject } from 'vue'
  import { onTick } from 'vue3-pixi'
+
+ const socket = inject('socket');
 
  const props = defineProps(['x', 'y']);
  const emit = defineEmits(['die', 'level-up', 'update:x', 'update:y']);
@@ -32,7 +34,9 @@
      velocityX.value = 1
  }
 
- useEventListener('click', jump)
+ socket.on('new-click', () => {
+     jump();
+ });
 
  // when hitting the ground
  whenever(
@@ -50,9 +54,16 @@
      () => {
          y.value = 10
          velocity.value = 0
-         emit('level-up')
      },
  )
+
+ // when hitting the right wall
+ whenever(
+     () => x.value > window.innerWidth - 30,
+     () => {
+         x.value = window.innerWidth - 30
+         velocityX.value = 0
+     })
 </script>
 <template>
     <sprite :x="x" :y="y" :texture="texture"
