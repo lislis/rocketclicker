@@ -15,14 +15,11 @@ app.use(router)
 
 
 const localIP = `${process.env.VUE_APP_SERVER_ADDRESS}`;
-const socketAddress = `ws://${process.env.VUE_APP_WS_ADDRESS}`;
+//const socketAddress = `ws://${process.env.VUE_APP_WS_ADDRESS}`;
 app.provide('apiEndpoint', `${localIP}/api`);
-app.provide('socketServer', socketAddress);
+//app.provide('socketServer', socketAddress);
 
-
-const URL = process.env.NODE_ENV === "production" ? undefined : localIP;
-
-const socket = io(URL);
+const socket = io(localIP);
 app.provide('socket', socket);
 
 app.mount('#app')
