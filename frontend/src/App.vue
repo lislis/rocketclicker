@@ -13,6 +13,7 @@
              ).then(d => d.json())
               .then(d => {
                   this.store.setMe(d);
+                  this.store.addUser(d);
 
                   this.socket.on('delete-game', (evt) => {
                       this.store.rmGame();

@@ -5,7 +5,7 @@
  import { wrappedFetch } from '@/utils';
 
  const store = useClickStore();
- const { getGame, getUsers, getClicks } = storeToRefs(store)
+ const { getGame, getUsers, getClicks, me } = storeToRefs(store)
  const { newGame, rmGame } = store
 
  const apiEndpoint = inject('apiEndpoint')
@@ -42,9 +42,12 @@
             <div>{{getClicks.length}}</div>
         </section>
         <section class="users">
-            <h2>Users online</h2>
+            <h2>Users online ({{getUsers.length}})</h2>
             <ul>
-                <li v-for="user in getUsers">{{user.name}}</li>
+                <li v-for="user in getUsers">
+                    {{user.name}}
+                    <span class="tag" v-if="user._id == me._id">me</span>
+                </li>
             </ul>
         </section>
     </div>
@@ -67,5 +70,13 @@
  .users {
      grid-row: 3 / span 1;
      grid-column: 2;
+ }
+ .tag {
+     background-color: grey;
+     color: white;
+     font-size: 0.8em;
+     padding: 0 .2em 0.1em;
+     vertical-align: text-bottom;
+     border-radius: 4px;
  }
 </style>
