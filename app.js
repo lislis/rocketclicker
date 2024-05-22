@@ -10,7 +10,6 @@ var logger = require('morgan');
 
 
 const MONGO_DB = process.env['MONGO_DB'];
-const MONGO_HOST = process.env['MONGO_HOST'];
 
 var app = express();
 
@@ -25,7 +24,7 @@ app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -35,8 +34,8 @@ app.use((req, res, next) => {
 
 const mongoose = require('mongoose');
 //mongoose.Promise = require('bluebird');
-console.log(`[mongodb] mongodb://${MONGO_HOST}/${MONGO_DB}`);
-mongoose.connect(`mongodb://${MONGO_HOST}/${MONGO_DB}`)
+console.log(`[mongodb] ${MONGO_DB}`);
+mongoose.connect(MONGO_DB)
   .then(() =>  console.log('[mongodb] connection successful'))
   .catch((err) => console.log(err));
 
