@@ -7,12 +7,14 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var history = require('connect-history-api-fallback');
 
 
 const MONGO_DB = process.env['MONGO_DB'];
 
 var app = express();
 
+app.use(history());
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
