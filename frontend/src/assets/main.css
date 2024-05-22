@@ -1,5 +1,10 @@
 @import './base.css';
 
+:root {
+  --footer-height: calc(1.2rem + 1.2rem + 1.5rem);
+}
+
+
 .wrapper {
   display: flex;
   min-height: 100vh;
@@ -11,7 +16,11 @@
 }
 .footer {
   color: lightgrey;
-  min-height: 3rem;
+  height: var(--footer-height);
   padding: 1.2rem 1rem;
   background-color: midnightblue;
+}
+
+strong {
+  font-weight: 600;
 }
