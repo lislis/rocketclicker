@@ -29,6 +29,10 @@
      position: relative;
      animation: 3s steps(8, end) infinite phases;
  }
+ .bg span {
+     display: inline-block;
+     width: 1em;
+ }
  @keyframes phases {
      0% {
          right: 0;

@@ -19,7 +19,10 @@ const socketAddress = `ws://${process.env.VUE_APP_WS_ADDRESS}`;
 app.provide('apiEndpoint', `${localIP}/api`);
 app.provide('socketServer', socketAddress);
 
-const socket = io(localIP);
+
+const URL = process.env.NODE_ENV === "production" ? undefined : localIP;
+
+const socket = io(URL);
 app.provide('socket', socket);
 
 app.mount('#app')
