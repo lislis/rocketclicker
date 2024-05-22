@@ -13,12 +13,13 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-const localIP = '127.0.0.1:3000';
-const socketAddress = `ws://127.0.0.1:3000`;
-app.provide('apiEndpoint', `http://${localIP}/api`);
+
+const localIP = `${process.env.VUE_APP_SERVER_ADDRESS}`;
+const socketAddress = `ws://${process.env.VUE_APP_WS_ADDRESS}`;
+app.provide('apiEndpoint', `${localIP}/api`);
 app.provide('socketServer', socketAddress);
 
-const socket = io(`http://${localIP}`);
+const socket = io(localIP);
 app.provide('socket', socket);
 
 app.mount('#app')
