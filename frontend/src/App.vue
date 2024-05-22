@@ -13,29 +13,30 @@
              ).then(d => d.json())
               .then(d => {
                   this.store.setMe(d);
+
+                  this.socket.on('delete-game', (evt) => {
+                      this.store.rmGame();
+                  });
+                  this.socket.on('new-game', (evt) => {
+                      this.store.newGame(evt.message);
+                  });
+                  this.socket.on('delete-all-clicks', (evt) => {
+                      this.store.rmAllClicks();
+                  });
+                  this.socket.on('new-click', (evt) => {
+                      this.store.addClick(evt.message);
+                  });
+                  this.socket.on('update-game', (evt) => {
+                      this.store.updateGame(evt.message);
+                  });
+                  this.socket.on('new-user', (evt) => {
+                      this.store.addUser(evt.message);
+                  });
+                  this.socket.on('remove-user', (evt) => {
+                      this.store.rmUser(evt.message);
+                  });
               });
 
-             this.socket.on('new-click', (evt) => {
-                 this.store.addClick(evt.message);
-             });
-             this.socket.on('delete-all-clicks', (evt) => {
-                 this.store.rmAllClicks();
-             });
-             this.socket.on('new-game', (evt) => {
-                 this.store.newGame(evt.message);
-             });
-             this.socket.on('delete-game', (evt) => {
-                 this.store.rmGame();
-             });
-             this.socket.on('update-game', (evt) => {
-                 this.store.updateGame(evt.message);
-             });
-             this.socket.on('new-user', (evt) => {
-                 this.store.addUser(evt.message);
-             });
-             this.socket.on('remove-user', (evt) => {
-                 this.store.rmUser(evt.message);
-             });
          });
      },
      setup() {
@@ -51,6 +52,11 @@
 
 <template>
     <div class="wrapper">
-        <RouterView />
+        <div class="main">
+            <RouterView />
+        </div>
+        <footer class="footer">
+            To the Moon 🚀🌔 - Cryptolike by STERNA | PAU
+        </footer>
     </div>
 </template>

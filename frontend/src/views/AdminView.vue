@@ -25,7 +25,7 @@
 
 </script>
 <template>
-    <div class="wrapper">
+    <div class="admin-wrapper">
         <h1>Admin area</h1>
         <section class="game">
             <h2>Game state</h2>
@@ -50,10 +50,10 @@
     </div>
 </template>
 <style scoped>
- .wrapper {
+ .admin-wrapper {
      padding: 1em;
      display: grid;
-     grid-template-rows: auto 1fr 1fr;
+     grid-template-rows: auto auto auto;
      grid-template-columns: 1fr 1fr;
  }
  .game {

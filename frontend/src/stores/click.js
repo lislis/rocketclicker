@@ -6,8 +6,8 @@ export const useClickStore = defineStore('clicks', {
     me: {},
     users: [],
     clicks: [],
-    game: {},
-    myClicks: []
+    game: null,
+    myClicks: 0
   }),
   getters: {
     getMe(state) {
@@ -51,6 +51,9 @@ export const useClickStore = defineStore('clicks', {
     addClick(click) {
       this.clicks.push(click);
     },
+    addMyClick() {
+      this.myClicks++;
+    },
     rmAllClicks() {
       this.clicks = [];
     },
@@ -58,7 +61,7 @@ export const useClickStore = defineStore('clicks', {
       this.game = game;
     },
     rmGame() {
-      this.game = {};
+      this.game = null;
     },
     updateGame(game) {
       this.game = game;

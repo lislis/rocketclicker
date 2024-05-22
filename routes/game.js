@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Game = require('../models/Game.js');
+const Click = require('../models/Click.js');
 
 router.get('/', async (req, res, next) => {
   const g = await Game.find();
@@ -17,6 +18,8 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   await Game.findOneAndDelete({});
+  await Click.deleteMany({});
+  req.app.ws.emit('delete-all-clicks');
   //const g = await Game.findOneAndDelete({_id: req.params.gameId });
   req.app.ws.emit('delete-game');
   return res.json({ message: "all deleted"});

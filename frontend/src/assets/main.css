@@ -1,1 +1,17 @@
 @import './base.css';
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-between;
+}
+.main {
+  flex-grow: 1;
+}
+.footer {
+  color: lightgrey;
+  min-height: 3rem;
+  padding: 1.2rem 1rem;
+  background-color: midnightblue;
+}
