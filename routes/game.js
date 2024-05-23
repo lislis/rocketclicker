@@ -6,6 +6,7 @@ const Click = require('../models/Click.js');
 
 router.get('/', async (req, res, next) => {
   const g = await Game.find();
+  res.setHeader('Content-Type', 'application/json');
   return res.json(g);
 });
 
@@ -13,6 +14,7 @@ router.post('/', async (req, res, next) => {
   const g = new Game(req.body);
   await g.save();
   req.app.ws.emit('new-game', { message: g });
+  res.setHeader('Content-Type', 'application/json');
   return res.json(g);
 });
 
@@ -22,6 +24,7 @@ router.delete('/', async (req, res, next) => {
   req.app.ws.emit('delete-all-clicks');
   //const g = await Game.findOneAndDelete({_id: req.params.gameId });
   req.app.ws.emit('delete-game');
+  res.setHeader('Content-Type', 'application/json');
   return res.json({ message: "all deleted"});
 });
 
@@ -31,6 +34,7 @@ router.put('/:gameId', async (req, res, next) => {
                                         req.body,
                                         { returnNewDocument: true });
   req.app.ws.emit('update-game', { message: g });
+  res.setHeader('Content-Type', 'application/json');
   return res.json(g);
 });
 

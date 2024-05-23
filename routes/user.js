@@ -5,6 +5,7 @@ const User = require('../models/User.js');
 
 router.get('/', async (req, res, next) => {
   const u = await User.find();
+  res.setHeader('Content-Type', 'application/json');
   return res.json(u);
 });
 
@@ -12,6 +13,7 @@ router.post('/', async (req, res, next) => {
   const u = new User(User.new(req.body.socket));
   await u.save();
   req.app.ws.emit('new-user', { message: u });
+  res.setHeader('Content-Type', 'application/json');
   return res.json(u);
 });
 
@@ -20,6 +22,7 @@ router.post('/', async (req, res, next) => {
 router.delete('/:userId', async (req, res, next) => {
   const u = await User.findOneAndDelete({_id: req.params.userId });
   req.app.ws.emit('remove-user', { message: u });
+  res.setHeader('Content-Type', 'application/json');
   return res.json(u);
 });
 

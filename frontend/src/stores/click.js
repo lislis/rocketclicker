@@ -1,5 +1,6 @@
 import { ref, computed, inject } from 'vue'
 import { defineStore } from 'pinia'
+import { wrappedFetch } from '@/utils';
 
 export const useClickStore = defineStore('clicks', {
   state: () => ({
@@ -32,19 +33,19 @@ export const useClickStore = defineStore('clicks', {
     },
     fetchClicks() {
       let apiEndpoint = inject('apiEndpoint');
-      fetch(`${apiEndpoint}/clicks`)
+      wrappedFetch(`${apiEndpoint}/clicks`, 'GET', null)
         .then(d => d.json())
         .then(d => this.clicks = d);
     },
     fetchUsers() {
       let apiEndpoint = inject('apiEndpoint');
-      fetch(`${apiEndpoint}/users`)
+      wrappedFetch(`${apiEndpoint}/users`, 'GET', null)
         .then(d => d.json())
         .then(d => this.users = d);
     },
     fetchGame() {
       let apiEndpoint = inject('apiEndpoint');
-      fetch(`${apiEndpoint}/games`)
+      wrappedFetch(`${apiEndpoint}/games`, 'GET', null)
         .then(d => d.json())
         .then(d => this.game = d[0]);
     },
