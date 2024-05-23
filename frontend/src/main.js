@@ -15,14 +15,13 @@ app.use(router)
 
 
 if (process.env.NODE_ENV === 'production') {
-  const localIP = `${process.env.VUE_APP_SERVER_ADDRESS}`;
-  app.provide('apiEndpoint', `${localIP}/api`);
-  const socket = io(localIP);
+  app.provide('apiEndpoint', `/api`);
+  const socket = io();
   app.provide('socket', socket);
 } else {
   const localIP = 'http://localhost:3000';
   app.provide('apiEndpoint', `${localIP}/api`);
-  const socket = io('http://localhost:3000');
+  const socket = io(localIP);
   app.provide('socket', socket);
 }
 

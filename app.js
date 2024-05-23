@@ -32,11 +32,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
-//app.use(express.static(path.join(__dirname, 'public')));
-
 const mongoose = require('mongoose');
-//mongoose.Promise = require('bluebird');
 console.log(`[mongodb] ${MONGO_DB}`);
 mongoose.connect(MONGO_DB)
   .then(() =>  console.log('[mongodb] connection successful'))
