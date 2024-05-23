@@ -14,6 +14,7 @@ const MONGO_DB = process.env['MONGO_DB'];
 
 var app = express();
 
+app.set('view engine', 'json');
 app.use(history());
 app.use(cors());
 app.use(logger('dev'));

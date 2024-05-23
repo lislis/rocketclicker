@@ -14,12 +14,18 @@ app.use(createPinia())
 app.use(router)
 
 
-const localIP = `${process.env.VUE_APP_SERVER_ADDRESS}`;
-//const socketAddress = `ws://${process.env.VUE_APP_WS_ADDRESS}`;
-app.provide('apiEndpoint', `${localIP}/api`);
-//app.provide('socketServer', socketAddress);
+if (process.env.NODE_ENV === 'production') {
+  const localIP = `${process.env.VUE_APP_SERVER_ADDRESS}`;
+  app.provide('apiEndpoint', `${localIP}/api`);
+  const socket = io(localIP);
+  app.provide('socket', socket);
+} else {
+  const localIP = 'http://localhost:3000';
+  app.provide('apiEndpoint', `${localIP}/api`);
+  const socket = io('http://localhost:3000');
+  app.provide('socket', socket);
+}
 
-const socket = io(localIP);
-app.provide('socket', socket);
+
 
 app.mount('#app')
