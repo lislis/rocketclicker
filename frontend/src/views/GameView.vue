@@ -6,6 +6,7 @@
  import { useClickStore } from '@/stores/click'
  import Loop from '@/components/Loop.vue'
  import Waiting from '@/components/Waiting.vue'
+ import ClickHistory from '@/components/ClickHistory.vue'
 
  const store = useClickStore();
  const { getGame, getUsers, getClicks } = storeToRefs(store)
@@ -22,6 +23,7 @@
 
 </script>
 <template>
+    <ClickHistory :clicks="getClicks" />
     <Application :width="width" :height="height"
                  :resolution="resolution"
                  backgroundColor="#aa33ff">
@@ -37,6 +39,7 @@
             <template #default="{ textures }">
                 <Waiting v-if="!getGame" />
                 <template v-else>
+
                     <Loop />
                 </template>
             </template>
