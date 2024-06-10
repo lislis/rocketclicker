@@ -1,6 +1,6 @@
 <script setup>
  import { whenever } from '@vueuse/core'
- import { Texture } from 'pixi.js'
+ import { Texture, Container } from 'pixi.js'
  import { ref, useModel, computed } from 'vue'
  import { onTick } from 'vue3-pixi'
 
