@@ -24,3 +24,26 @@
 strong {
   font-weight: 600;
 }
+.clickhistory {
+  position: absolute;
+  bottom: 2em;
+  left: 1em;
+  color: white;
+  padding: 0;
+  list-style: none;
+  height: 13em;
+  width: auto;
+  overflow-y: scroll;
+}
+
+.clickhistory li {
+  opacity: 0.2;
+}
+
+.clickhistory li:nth-last-of-type(-n+4) {
+  opacity: 0.65;
+}
+
+.clickhistory li:nth-last-of-type(-n+2) {
+  opacity: 1.0;
+}

@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/User.js');
 const Click = require('../models/Click.js');
 
 router.get('/', async (req, res, next) => {
-  const c = await Click.find();
+  const c = await Click.find().populate('by');
   res.setHeader('Content-Type', 'application/json');
   return res.json(c);
 });

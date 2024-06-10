@@ -15,7 +15,7 @@
  function countingClicks() {
      wrappedFetch(`${apiEndpoint}/clicks`,
                   'POST',
-                  JSON.stringify({ by: me.value._id }))
+                  JSON.stringify({ by: me.value._id, username: me.value.name }))
          .then(d => d.json())
          .then(d => {
              addMyClick();
