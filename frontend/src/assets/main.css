@@ -24,6 +24,9 @@
 strong {
   font-weight: 600;
 }
+.clickhistory::-webkit-scrollbar {
+  display: none;
+}
 .clickhistory {
   position: absolute;
   bottom: 2em;
@@ -34,6 +37,9 @@ strong {
   height: 13em;
   width: auto;
   overflow-y: scroll;
+  padding-right: 1.3em;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
 
 .clickhistory li {
