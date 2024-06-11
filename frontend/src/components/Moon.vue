@@ -14,6 +14,6 @@
 </script>
 <template>
     <sprite :x="x" :y="y" :texture="texture"
-            :anchor-x="0.5" :anchor-y="0.5"
+            :anchor-x="0.5" :anchor-y="0.5" alpha="0.95"
             :scale="scale" />
 </template>

@@ -5,7 +5,7 @@ const props = defineProps(['clicks'])
 const clickcontainer = ref(null)
 
 onMounted(() => {
-    console.log(clickcontainer)
+    //console.log(clickcontainer)
     let observer = new MutationObserver(scrollToBottom);// Tell it to look for new children that will change the height.
     const config = {childList: true};
     observer.observe(clickcontainer.value, config);

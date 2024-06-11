@@ -56,8 +56,5 @@
         <div class="main">
             <RouterView />
         </div>
-        <footer class="footer">
-            To the Moon 🚀🌔 - Cryptolike by STERNA | PAU
-        </footer>
     </div>
 </template>
