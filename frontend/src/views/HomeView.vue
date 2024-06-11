@@ -4,11 +4,13 @@
  import { inject } from 'vue'
  import { wrappedFetch } from '@/utils';
  import Loader from '@/components/Loader.vue';
+ import { sound } from '@pixi/sound';
 
  const store = useClickStore();
  const { me, myClicks, getGame } = storeToRefs(store)
  const { addMyClick } = store
 
+ sound.add('pickupCoin', '/sounds/pickupCoin.wav');
 
  const apiEndpoint = inject('apiEndpoint')
 
@@ -18,6 +20,7 @@
                   JSON.stringify({ by: me.value._id, username: me.value.name }))
          .then(d => d.json())
          .then(d => {
+            sound.play('pickupCoin');
              addMyClick();
          })
  }
@@ -38,6 +41,9 @@
             Waiting for game to start
         </div>
     </main>
+    <footer class="footer">
+        To the Moon 🚀🌔 - Cryptolike by STERNA | PAU
+    </footer>
 </template>
 <style scoped>
 
