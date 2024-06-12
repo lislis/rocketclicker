@@ -17,6 +17,8 @@ function distanceBetweenTwoPoints(p1, p2) {
 function levelup() {
     level.value = level.value + 1;
     state = reactive(levels[level.value]);
+    moonCoords.x = window.innerWidth - state.moon.x;
+    moonCoords.y = state.moon.y;
     bgDistance.value = 0;
     bgDistance2.value = state.bg.width;
 }
@@ -24,12 +26,12 @@ function levelup() {
 const level = ref(1);
 let state = reactive(levels[level.value]);
 const distance = ref(0);
-
 const bgDistance = ref(0);
 const bgDistance2 = ref(state.bg.width);
+const moonCoords = reactive({ x: window.innerWidth - state.moon.x, y: state.moon.y})
 
 onTick((dt) => {
-    distance.value = distanceBetweenTwoPoints(state.rocket, state.moon);
+    distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
 
     const bg_dx = dt * 0.9;
     
@@ -59,7 +61,7 @@ whenever(
         <text :x="20" :y="20"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
 
-        <Moon v-model:x="state.moon.x" v-model:y="state.moon.y" v-model:scale="state.moon.scale" />
+        <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" />
 
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
     </container>
