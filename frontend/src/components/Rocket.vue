@@ -30,7 +30,7 @@
  })
 
  function jump() {
-     velocity.value = -9
+     velocity.value = -5
      velocityX.value = 1
  }
 

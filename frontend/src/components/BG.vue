@@ -14,5 +14,5 @@ const hHeight = inject('hHeight', window.outerHeight);
 const texture = 'bg1';
 </script>
 <template>
-    <sprite :x="x * scale" :y="y * scale" :texture="texture" alpha="0.86" :height="hHeight" />
+    <sprite :x="x * scale" :y="y * scale" :texture="texture" alpha="0.56" :height="hHeight" />
 </template>

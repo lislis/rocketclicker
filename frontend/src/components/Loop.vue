@@ -28,13 +28,14 @@ let state = reactive(levels[level.value]);
 const distance = ref(0);
 const bgDistance = ref(0);
 const bgDistance2 = ref(state.bg.width);
-const moonCoords = reactive({ x: window.innerWidth - state.moon.x, y: state.moon.y})
+const moonCoords = reactive({ x: window.innerWidth - state.moon.x, y: state.moon.y, rotate: 0})
 
 onTick((dt) => {
     distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
 
+    moonCoords.rotate += 0.003 * dt;
+
     const bg_dx = dt * 0.9;
-    
     bgDistance.value -= bg_dx;
     bgDistance2.value -= bg_dx;
 
@@ -58,10 +59,10 @@ whenever(
             :scale="state.bg.scale" />
         <BG :x="bgDistance2" :y="state.bg.y" 
             :scale="state.bg.scale" />
-        <text :x="20" :y="20"
+        <text x="20" y="20"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
 
-        <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" />
+        <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" />
 
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
     </container>

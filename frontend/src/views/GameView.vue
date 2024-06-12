@@ -31,7 +31,7 @@ const images = {
     <ClickHistory :clicks="getClicks" />
     <Application :width="width" :height="height"
                  :resolution="resolution"
-                 backgroundColor="#2d0e70">
+                 backgroundColor="#2d0e90">
         <Loader :resources="images">
             <!-- loading state via #fallback slot -->
             <template #fallback>
