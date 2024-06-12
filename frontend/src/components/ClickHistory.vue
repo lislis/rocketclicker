@@ -19,6 +19,6 @@ onMounted(() => {
 </script>
 <template>
     <ul class="clickhistory" ref="clickcontainer">
-        <li v-for="click in clicks"><strong>{{click.username}}</strong> clicked!</li>
+        <li v-for="click in clicks" class="anim-intro"><strong>{{click.username}}</strong> clicked!</li>
     </ul>
 </template>
