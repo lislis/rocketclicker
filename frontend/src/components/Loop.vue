@@ -30,8 +30,6 @@ function levelup() {
     cityCoords2.scale = state.skyline.scale;
     cityCoords2.y = state.skyline.y;
     cityCoords2.x = state.skyline.width;
-
-    shoot(level.value)
 }
 
 const level = ref(1);
@@ -73,7 +71,10 @@ onTick((dt) => {
 
 whenever(
     () => distance.value < state.distance,
-    () => levelup()
+    () => {
+        shoot(level.value)
+        levelup()
+    }
 )
 
 </script>

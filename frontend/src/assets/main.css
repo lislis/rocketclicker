@@ -23,6 +23,11 @@
   background-color: midnightblue;
 }
 
+.footer a {
+  color: #eee;
+  
+}
+
 strong {
   font-weight: 600;
 }

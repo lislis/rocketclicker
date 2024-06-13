@@ -38,7 +38,7 @@ const images = {
             <template #fallback>
                 <text :anchor="0.5" :x="120" :y="120"
                       :style="{ fill: 'white' }">
-                    Loading...
+                    Laden...
                 </text>
             </template>
             <!-- component with nested async dependencies -->

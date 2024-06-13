@@ -30,63 +30,89 @@
 <template>
     <main class="userface" v-if="getGame">
         <div class="clickme" @click="countingClicks()">
-            <p>click here!</p>
+            <button><span>Click!</span></button>
         </div>
-        <div class="click-stats">You are {{me.name}}.</div>
-        <div class="click-stats">You contributed <strong>{{myClicks}}</strong> clicks.</div>
+        <div class="click-stats">Du bist <strong>{{me.name}}</strong>.</div>
+        <div class="click-stats">Du hast <strong>{{myClicks}}</strong> Clicks beigetragen.</div>
     </main>
     <main v-else  class="userface">
         <div class="waiting">
             <Loader />
-            Waiting for game to start
+            Warten bis das Spiel startet...
         </div>
     </main>
     <footer class="footer">
-        To the Moon 🚀🌔 - Cryptolike by STERNA | PAU
+        <a href="https://github.com/lislis/rocketclicker" target="_blank">Rocketclicker</a> 🚀🌔 - cryptolike by <a href="https://sternapau.de/" target="_blank">STERNA | PAU</a>
     </footer>
 </template>
 <style scoped>
+.clickme {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    text-align: center;
+    font-variant: small-caps;
+    margin-bottom: 1rem;
+}
+.clickme button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: transform 200ms ease;
+    cursor: pointer;
+    background: radial-gradient(
+        circle at top,
+        white,
+        orange,
+        red,
+        darkred,
+        maroon,
+        black
+    );
+    border-radius: 50%;
+    margin: 25px auto;
+    height: 60vw;
+    width: 60vw;
+    border-top: none;
+    border-right: 5px solid black;
+    border-left: 5px solid black;
+    border-bottom: 5px solid black;
+    box-shadow: -5px 10px 20px black, 5px 10px 20px black;
+}
 
+.clickme button span {
+    background: red;
+    color: white;
+    display: block;
+    height: 47vw;
+    width: 47vw;
+    margin: auto;
+    border-radius: 50%;
+    font-size: 2rem;
+    line-height: 6;
+    text-shadow: -1px -1px 5px #ffffff3d, -1px 1px 10px #ffffff3d, 1px -1px 10px #ffffff3d, 1px 1px 10px #ffffff3d
+}
 
- .clickme {
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 60vh;
-     border: 1em solid  rgba(255, 255, 255, 0.7);
-     border-radius: 20px;
-     background-color: rgba(255, 255, 255, 0.2);
-     text-align: center;
-     font-variant: small-caps;
-     cursor: pointer;
-     margin-bottom: 1rem;
- }
- .clickme p {
-     -webkit-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
-     transition: font-size 200ms ease;
- }
+.clickme:active button {
+    transform: scale(0.9);
+}
 
- .clickme:active p {
-     font-size: 1.4em;
- }
+.click-stats {
+    font-size: 1.25rem;
+    line-height: 1.55;
+}
 
- .click-stats {
-     font-size: 1.25rem;
-     line-height: 1.55;
- }
+.userface {
+    height: calc(100vh - var(--footer-height));
+    color: lightgrey;
+    background-color: midnightblue;
+    padding: 1em;
+}
 
- .userface {
-     height: calc(100vh - var(--footer-height));
-     color: lightgrey;
-     background-color: midnightblue;
-     padding: 1em;
- }
-
- .waiting {
-     text-align: center;
- }
+.waiting {
+    text-align: center;
+}
 
 </style>
