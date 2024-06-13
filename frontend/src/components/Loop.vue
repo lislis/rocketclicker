@@ -31,7 +31,7 @@ function levelup() {
     cityCoords2.y = state.skyline.y;
     cityCoords2.x = state.skyline.width;
 
-    shoot()
+    shoot(level.value)
 }
 
 const level = ref(1);
