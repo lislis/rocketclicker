@@ -2,7 +2,8 @@
 import { useEventListener, whenever } from '@vueuse/core'
 import { Application, Loader, onTick } from "vue3-pixi";
 import { reactive, ref, watch, useModel } from 'vue'
-import { levels } from '@/data/game'
+import { levels } from '@/data/game.js'
+import { shoot } from '@/data/particle.js'
 
 import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
@@ -14,6 +15,7 @@ function distanceBetweenTwoPoints(p1, p2) {
     const b = p1.y - p2.y;
     return Math.hypot(a, b);
 }
+
 
 function levelup() {
     level.value = level.value + 1;
@@ -28,6 +30,8 @@ function levelup() {
     cityCoords2.scale = state.skyline.scale;
     cityCoords2.y = state.skyline.y;
     cityCoords2.x = state.skyline.width;
+
+    shoot()
 }
 
 const level = ref(1);
@@ -43,7 +47,7 @@ onTick((dt) => {
     distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
 
     moonCoords.rotate += 0.003 * dt;
-
+    
     const bg_dx = dt * 0.99;
     bgDistance.value -= bg_dx;
     bgDistance2.value -= bg_dx;
@@ -51,8 +55,6 @@ onTick((dt) => {
     const bg_city = dt * 2.8;
     cityCoords.x -= bg_city;
     cityCoords2.x -= bg_city;
-
-    console.log(cityCoords.x, cityCoords2.x)
 
     if (bgDistance.value <= -state.bg.width) {
         bgDistance.value += state.bg.width * 2;
@@ -66,6 +68,7 @@ onTick((dt) => {
     if (cityCoords2.x <= -state.skyline.width) {
         cityCoords2.x += state.skyline.width * 2;
     }
+
 })
 
 whenever(

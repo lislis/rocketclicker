@@ -13,7 +13,6 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
-
 if (process.env.NODE_ENV === 'production') {
   app.provide('apiEndpoint', `/api`);
   const socket = io();

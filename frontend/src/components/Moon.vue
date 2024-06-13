@@ -12,6 +12,7 @@
  const rotate = useModel(props, 'rotate');
 
  const texture = 'moon';
+
 </script>
 <template>
     <container >

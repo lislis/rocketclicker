@@ -7,7 +7,7 @@
  const socket = inject('socket');
 
  const props = defineProps(['x', 'y']);
- const emit = defineEmits(['die', 'level-up', 'update:x', 'update:y']);
+ const emit = defineEmits(['jump']);
 
  const x = useModel(props, 'x')
  const y = useModel(props, 'y')
@@ -30,7 +30,7 @@
  })
 
  function jump() {
-     velocity.value = -4
+     velocity.value = -6
      velocityX.value = 1
  }
 
