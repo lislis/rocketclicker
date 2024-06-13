@@ -1,0 +1,1 @@
+const e=["624099","8e4099","404a99","eee"],a=n=>{const o=Date.now()+n*1e3;(function t(){confetti({particleCount:2,angle:60,spread:55,origin:{x:0},shapes:["star","circle"],colors:e}),confetti({particleCount:2,angle:120,spread:55,origin:{x:1},shapes:["star","circle"],colors:e}),Date.now()<o&&requestAnimationFrame(t)})()};export{a as c};
