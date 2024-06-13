@@ -57,6 +57,7 @@ strong {
 }
 
 .anim-intro {
+  transform-origin: center center;
   animation: blowup 1 ease 200ms;
 }
 

@@ -7,6 +7,7 @@ import { levels } from '@/data/game'
 import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
 import BG from '@/components/BG.vue'
+import Skyline from '@/components/Skyline.vue'
 
 function distanceBetweenTwoPoints(p1, p2) {
     const a = p1.x - p2.x;
@@ -21,6 +22,12 @@ function levelup() {
     moonCoords.y = state.moon.y;
     bgDistance.value = 0;
     bgDistance2.value = state.bg.width;
+    cityCoords.scale = state.skyline.scale;
+    cityCoords.y = state.skyline.y;
+    cityCoords.x = state.skyline.x;
+    cityCoords2.scale = state.skyline.scale;
+    cityCoords2.y = state.skyline.y;
+    cityCoords2.x = state.skyline.width;
 }
 
 const level = ref(1);
@@ -29,21 +36,35 @@ const distance = ref(0);
 const bgDistance = ref(0);
 const bgDistance2 = ref(state.bg.width);
 const moonCoords = reactive({ x: window.innerWidth - state.moon.x, y: state.moon.y, rotate: 0})
+const cityCoords = reactive({ x: state.skyline.x, y: state.skyline.y, scale: state.skyline.scale })
+const cityCoords2 = reactive({ x: state.skyline.width, y: state.skyline.y, scale: state.skyline.scale })
 
 onTick((dt) => {
     distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
 
     moonCoords.rotate += 0.003 * dt;
 
-    const bg_dx = dt * 0.9;
+    const bg_dx = dt * 0.99;
     bgDistance.value -= bg_dx;
     bgDistance2.value -= bg_dx;
+
+    const bg_city = dt * 2.8;
+    cityCoords.x -= bg_city;
+    cityCoords2.x -= bg_city;
+
+    console.log(cityCoords.x, cityCoords2.x)
 
     if (bgDistance.value <= -state.bg.width) {
         bgDistance.value += state.bg.width * 2;
     }
     if (bgDistance2.value <= -state.bg.width) {
         bgDistance2.value += state.bg.width * 2;
+    }
+    if (cityCoords.x <= -state.skyline.width) {
+        cityCoords.x += state.skyline.width * 2;
+    }
+    if (cityCoords2.x <= -state.skyline.width) {
+        cityCoords2.x += state.skyline.width * 2;
     }
 })
 
@@ -59,11 +80,14 @@ whenever(
             :scale="state.bg.scale" />
         <BG :x="bgDistance2" :y="state.bg.y" 
             :scale="state.bg.scale" />
+
+        <Skyline :x="cityCoords.x" :y="cityCoords.y" :scale="cityCoords.scale" />
+        <Skyline :x="cityCoords2.x" :y="cityCoords2.y" :scale="cityCoords2.scale" />
+
         <text x="20" y="20"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" />
-
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
     </container>
 </template>

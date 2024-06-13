@@ -30,7 +30,7 @@
  })
 
  function jump() {
-     velocity.value = -5
+     velocity.value = -4
      velocityX.value = 1
  }
 
@@ -68,5 +68,5 @@
 <template>
     <sprite :x="x" :y="y" :texture="texture"
             :anchor-x="0.5" :anchor-y="0.5"
-            scale="0.2" />
+            scale="0.5" />
 </template>
