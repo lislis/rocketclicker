@@ -20,7 +20,6 @@ provide('wHeight', height);
 
 const images = {
     moon: '/textures/moon2.png',
-    mars: '/textures/mars.png',
     bg1: '/textures/background-stars2.png',
     rocketFire: '/textures/rocket2-fire.png',
     rocketEmpty: '/textures/rocket2.png',
