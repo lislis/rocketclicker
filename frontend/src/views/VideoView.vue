@@ -1,6 +1,10 @@
 <script setup>
     import { cannon } from '@/data/particle.js'
+    import { sound } from '@pixi/sound';
 
+    sound.add('cheers', 'sounds/cheers.wav')
+
+    sound.play('cheers')
     cannon(20)
 </script>
 

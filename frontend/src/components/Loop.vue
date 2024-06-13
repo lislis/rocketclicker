@@ -4,7 +4,8 @@ import { Application, Loader, onTick } from "vue3-pixi";
 import { reactive, ref, watch, useModel } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { levels } from '@/data/game.js'
-import { shoot, cannon } from '@/data/particle.js'
+import { cannon } from '@/data/particle.js'
+import { sound } from '@pixi/sound';
 
 import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
@@ -12,6 +13,7 @@ import BG from '@/components/BG.vue'
 import Skyline from '@/components/Skyline.vue'
 
 const router = useRouter()
+sound.add('yay', '/sounds/yay.wav');
 
 function distanceBetweenTwoPoints(p1, p2) {
     const a = p1.x - p2.x;
@@ -78,7 +80,7 @@ onTick((dt) => {
 whenever(
     () => distance.value < state.distance,
     () => {
-        //shoot(level.value)
+        sound.play('yay');
         cannon(1)
         levelup()
     }
