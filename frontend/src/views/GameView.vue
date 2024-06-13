@@ -9,7 +9,7 @@ import Waiting from '@/components/Waiting.vue'
 import ClickHistory from '@/components/ClickHistory.vue'
 
 const store = useClickStore();
-const { getGame, getUsers, getClicks } = storeToRefs(store)
+const { getGame, getClicks } = storeToRefs(store)
 
 const width = window.innerWidth;
 const height = window.outerHeight;

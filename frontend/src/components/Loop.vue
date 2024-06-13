@@ -11,13 +11,13 @@ import Moon from '@/components/Moon.vue'
 import BG from '@/components/BG.vue'
 import Skyline from '@/components/Skyline.vue'
 
+const router = useRouter()
+
 function distanceBetweenTwoPoints(p1, p2) {
     const a = p1.x - p2.x;
     const b = p1.y - p2.y;
     return Math.hypot(a, b);
 }
-
-const router = useRouter()
 
 function levelup() {
     level.value = level.value + 1;
@@ -95,7 +95,7 @@ whenever(
         <Skyline :x="cityCoords.x" :y="cityCoords.y" :scale="cityCoords.scale" />
         <Skyline :x="cityCoords2.x" :y="cityCoords2.y" :scale="cityCoords2.scale" />
 
-        <text x="20" y="20"
+        <text x="40" y="30"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" />
