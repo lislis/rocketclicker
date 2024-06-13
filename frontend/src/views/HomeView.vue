@@ -106,8 +106,6 @@
 
 .userface {
     height: calc(100vh - var(--footer-height));
-    color: lightgrey;
-    background-color: midnightblue;
     padding: 1em;
 }
 

@@ -2,8 +2,9 @@
 import { useEventListener, whenever } from '@vueuse/core'
 import { Application, Loader, onTick } from "vue3-pixi";
 import { reactive, ref, watch, useModel } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { levels } from '@/data/game.js'
-import { shoot } from '@/data/particle.js'
+import { shoot, cannon } from '@/data/particle.js'
 
 import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
@@ -16,20 +17,25 @@ function distanceBetweenTwoPoints(p1, p2) {
     return Math.hypot(a, b);
 }
 
+const router = useRouter()
 
 function levelup() {
     level.value = level.value + 1;
-    state = reactive(levels[level.value]);
-    moonCoords.x = window.innerWidth - state.moon.x;
-    moonCoords.y = state.moon.y;
-    bgDistance.value = 0;
-    bgDistance2.value = state.bg.width;
-    cityCoords.scale = state.skyline.scale;
-    cityCoords.y = state.skyline.y;
-    cityCoords.x = state.skyline.x;
-    cityCoords2.scale = state.skyline.scale;
-    cityCoords2.y = state.skyline.y;
-    cityCoords2.x = state.skyline.width;
+    if (Object.keys(levels).length < level.value) {
+        router.push({ name: 'video'})
+    } else {
+        state = reactive(levels[level.value]);
+        moonCoords.x = window.innerWidth - state.moon.x;
+        moonCoords.y = state.moon.y;
+        bgDistance.value = 0;
+        bgDistance2.value = state.bg.width;
+        cityCoords.scale = state.skyline.scale;
+        cityCoords.y = state.skyline.y;
+        cityCoords.x = state.skyline.x;
+        cityCoords2.scale = state.skyline.scale;
+        cityCoords2.y = state.skyline.y;
+        cityCoords2.x = state.skyline.width;
+    }
 }
 
 const level = ref(1);
@@ -72,7 +78,8 @@ onTick((dt) => {
 whenever(
     () => distance.value < state.distance,
     () => {
-        shoot(level.value)
+        //shoot(level.value)
+        cannon(1)
         levelup()
     }
 )

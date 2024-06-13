@@ -17,15 +17,12 @@
   overflow: hidden;
 }
 .footer {
-  color: lightgrey;
   height: var(--footer-height);
   padding: 1.2rem 1rem;
-  background-color: midnightblue;
 }
 
 .footer a {
   color: #eee;
-  
 }
 
 strong {

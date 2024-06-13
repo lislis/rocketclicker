@@ -1,6 +1,4 @@
 export const levels = {
-  width: 2000,
-  height: 721,
   1: {
     rocket: { x: 80, y: 50 },
     moon: { x: 170, y: 110, scale: 0.1},

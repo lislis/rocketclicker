@@ -46,8 +46,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  color: lightgrey;
+  background: #3c2f6b;
   transition:
     color 0.5s,
     background-color 0.5s;
