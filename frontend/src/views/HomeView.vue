@@ -9,10 +9,9 @@
  const store = useClickStore();
  const { me, myClicks, getGame } = storeToRefs(store)
  const { addMyClick } = store
+ const apiEndpoint = inject('apiEndpoint')
 
  sound.add('pickupCoin', '/sounds/pickupCoin.wav');
-
- const apiEndpoint = inject('apiEndpoint')
 
  function countingClicks() {
      wrappedFetch(`${apiEndpoint}/clicks`,
@@ -21,12 +20,10 @@
          .then(d => d.json())
          .then(d => {
             sound.play('pickupCoin');
-             addMyClick();
+            addMyClick();
          })
  }
-
 </script>
-
 <template>
     <main class="userface" v-if="getGame">
         <div class="clickme" @click="countingClicks()">

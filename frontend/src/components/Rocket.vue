@@ -1,42 +1,68 @@
 <script setup>
- import { useEventListener, whenever } from '@vueuse/core'
- import { Texture } from 'pixi.js'
- import { ref, useModel, computed, inject } from 'vue'
- import { onTick } from 'vue3-pixi'
+import { useEventListener, whenever } from '@vueuse/core'
+import { Texture } from 'pixi.js'
+import { ref, useModel, computed, inject } from 'vue'
+import { onTick } from 'vue3-pixi'
+import { storeToRefs } from 'pinia'
+import { useClickStore } from '@/stores/click'
 
- const socket = inject('socket');
+const store = useClickStore();
+const { resetCandlesticks, getCandlesticks } = storeToRefs(store)
 
- const props = defineProps(['x', 'y']);
- const emit = defineEmits(['jump']);
+const socket = inject('socket');
 
- const x = useModel(props, 'x')
- const y = useModel(props, 'y')
+const props = defineProps(['x', 'y']);
+const emit = defineEmits(['jump']);
 
- const velocity = ref(-6)
- const velocityX = ref(1)
- const gravity = 0.4
- const friction = 0.1
+const x = useModel(props, 'x')
+const y = useModel(props, 'y')
+
+const velocity = ref(-6)
+const velocityX = ref(1)
+const gravity = 0.4
+const friction = 0.1
+
+const w = window.innerWidth;
+const columnWidth = 25;
+const columns = Math.floor(w / columnWidth);
+const rocketCol = ref(1);
+const prevRocketCol = ref(1);
 
  const texture = computed(() => {
      return velocity.value < -2 ? 'rocketFire' : 'rocketEmpty';
  })
-
+ 
  const remove = onTick((dt) => {
-     y.value += velocity.value * dt
-     x.value += velocityX.value * dt
+    y.value += velocity.value * dt
+    x.value += velocityX.value * dt
 
-     velocity.value += gravity * dt
-     velocityX.valuue += friction * dt
- })
+    velocity.value += gravity * dt
+
+    rocketCol.value = Math.floor(x.value / columns);
+})
 
  function jump() {
-     velocity.value = -6
-     velocityX.value = 1
+    velocity.value = -6
+    velocityX.value = 1
  }
 
  socket.on('new-click', () => {
-     jump();
+    jump();
  });
+
+ // when reaching a new column
+ whenever(
+    () => prevRocketCol.value < rocketCol.value,
+    () => {
+        prevRocketCol.value = rocketCol.value;
+        let candlestick = { id: rocketCol.value,
+                            x: x.value, y: y.value, 
+                            open: y.value, close: y.value, 
+                            oWick: Math.floor(Math.random() * 20), cWick: Math.floor(Math.random() * 20)};
+       // console.log(candlestick)
+        store.addCandlestick(candlestick);
+    }
+)
 
  // when hitting the ground
  whenever(

@@ -1,20 +1,22 @@
 <script setup>
 import { useEventListener, whenever } from '@vueuse/core'
 import { Application, Loader, onTick } from "vue3-pixi";
-import { reactive, ref, watch, useModel } from 'vue'
+import { reactive, ref, watch, useModel, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { levels } from '@/data/game.js'
 import { cannon } from '@/data/particle.js'
 import { sound } from '@pixi/sound';
+import { useClickStore } from '@/stores/click'
 
 import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
 import BG from '@/components/BG.vue'
 import Skyline from '@/components/Skyline.vue'
-import Candlestick from '@/components/Candlestick.vue';
+import CandlestickList from '@/components/CandlestickList.vue';
 
 const router = useRouter()
 sound.add('yay', '/sounds/yay.wav');
+const store = useClickStore();
 
 function distanceBetweenTwoPoints(p1, p2) {
     const a = p1.x - p2.x;
@@ -38,8 +40,10 @@ function levelup() {
         cityCoords2.scale = state.skyline.scale;
         cityCoords2.y = state.skyline.y;
         cityCoords2.x = state.skyline.width;
+        store.resetCandlesticks();
     }
 }
+
 
 const level = ref(1);
 let state = reactive(levels[level.value]);
@@ -75,7 +79,6 @@ onTick((dt) => {
     if (cityCoords2.x <= -state.skyline.width) {
         cityCoords2.x += state.skyline.width * 2;
     }
-
 })
 
 whenever(
@@ -101,7 +104,7 @@ whenever(
         <text x="40" y="30"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
 
-        <Candlestick />
+        <CandlestickList />
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" />
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />

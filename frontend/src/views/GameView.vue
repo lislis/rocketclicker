@@ -1,7 +1,7 @@
 <script setup>
 import { useEventListener, whenever } from '@vueuse/core'
 import { Application, Loader, onTick } from "vue3-pixi";
-import { reactive, ref, watch, provide } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 import Loop from '@/components/Loop.vue'
@@ -14,9 +14,6 @@ const { getGame, getClicks } = storeToRefs(store)
 const width = window.innerWidth;
 const height = window.outerHeight;
 const resolution = window.devicePixelRatio;
-
-provide('wWidth', width);
-provide('wHeight', height);
 
 const images = {
     moon: '/textures/moon2.png',

@@ -1,17 +1,35 @@
 <script setup>
-    import { storeToRefs } from 'pinia'
-    import { useClickStore } from '@/stores/click'
+    import { useModel } from 'vue'
+    import { onTick } from 'vue3-pixi'
 
-    const store = useClickStore();
-    const { getCandlesticks } = storeToRefs(store)
+    const props = defineProps(['stick', 'key'])
+    //const stick = useModel(props, 'stick')
+    //const key = useModel(props, 'key');
 
-    function onDrawCandleStick(someRect, candlestick) {
-        console.log(someRect, candlestick);
-        someRect.beginFill(16711680);
-        someRect.drawRect(0, 0, 20, 90);
+    //console.log(key, stick);
+    const { stick } = props;
+
+    const stickWidth = 20;
+    const stickHeight = (stick.open >= stick.close) ? stick.open - stick.close : stick.close - stick.open;
+    const stickColor = (stick.open >= stick.close) ? 16711680 : 65280;
+
+     onTick((dt) => {
+         console.log(stick.open, stick.x, stickHeight)
+    })
+
+    function onDrawCandleStick(someRect) {
+        someRect.beginFill(stickColor);
+        someRect.drawRect(0, stick.y - stick.open, stickWidth, 20);
         someRect.endFill();
+    }
+
+    function onDrawWicks(realPath) {
+        realPath.lineStyle(2, stickColor, 1);
+        realPath.moveTo(stickWidth / 2, -stick.oWick);
+        realPath.lineTo(stickWidth / 2, stickHeight + stick.cWick);
     }
 </script>
 <template>
-    <graphics v-for="candlestick in getCandlesticks" @render="onDrawCandleStick(candlestick)" :x="candlestick.x" :y="candlestick.y" />
+    <graphics :x="stick.x" :y="stick.y" @render="onDrawWicks" />
+    <graphics @render="onDrawCandleStick" :x="stick.x" :y="stick.y" />
 </template>
