@@ -8,7 +8,8 @@ export const useClickStore = defineStore('clicks', {
     users: [],
     clicks: [],
     game: null,
-    myClicks: 0
+    myClicks: 0,
+    candlesticks: []
   }),
   getters: {
     getMe(state) {
@@ -25,6 +26,9 @@ export const useClickStore = defineStore('clicks', {
     },
     getMyClicks: (state) => {
       return state.myClicks;
+    },
+    getCandlesticks: (state) => {
+      return state.candlesticks;
     }
   },
   actions: {
@@ -73,6 +77,12 @@ export const useClickStore = defineStore('clicks', {
     rmUser(user) {
       let index = this.users.findIndex(x => x._id === user._id);
       this.users.splice(index, 1);
+    },
+    addCandlestick(stick) {
+      this.candlesticks.push(stick);
+    },
+    resetCandlesticks() {
+      this.candlesticks = [];
     }
   }
 
