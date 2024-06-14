@@ -11,6 +11,7 @@ import Rocket from '@/components/Rocket.vue'
 import Moon from '@/components/Moon.vue'
 import BG from '@/components/BG.vue'
 import Skyline from '@/components/Skyline.vue'
+import Candlestick from '@/components/Candlestick.vue';
 
 const router = useRouter()
 sound.add('yay', '/sounds/yay.wav');
@@ -99,6 +100,8 @@ whenever(
 
         <text x="40" y="30"
               :style="{ fill: 'white' }">{{state.blurp}}</text>
+
+        <Candlestick />
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" />
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
