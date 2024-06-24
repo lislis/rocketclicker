@@ -16,11 +16,15 @@ const height = window.outerHeight;
 const resolution = window.devicePixelRatio;
 
 const images = {
-    moon: '/textures/moon2.png',
+    moon: '/textures/moon3.png',
     bg1: '/textures/background-stars2.png',
+    whitepaper: '/textures/whitepaper2.png',
+    currencies: '/textures/currencies2.png',
+    headlines: '/textures/headlines.png',
     rocketFire: '/textures/rocket2-fire.png',
     rocketEmpty: '/textures/rocket2.png',
-    skyline: '/textures/skyline.png'
+    skyline: '/textures/skyline.png',
+    bitcoin: '/textures/bitcoin.png',
 }
 
 </script>

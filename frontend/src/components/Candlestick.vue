@@ -1,32 +1,31 @@
 <script setup>
-    import { useModel } from 'vue'
-    import { onTick } from 'vue3-pixi'
+    import { toRefs, reactive, computed } from 'vue';
+    import { useClickStore } from '@/stores/click'
+    import { storeToRefs,  } from 'pinia'
 
-    const props = defineProps(['stick', 'key'])
-    //const stick = useModel(props, 'stick')
-    //const key = useModel(props, 'key');
+    const props = defineProps(['index'])
+    const store = useClickStore();
+   const stick = store.getCandlestickByIndex(props.index);
 
-    //console.log(key, stick);
-    const { stick } = props;
-
-    const stickWidth = 20;
-    const stickHeight = (stick.open >= stick.close) ? stick.open - stick.close : stick.close - stick.open;
-    const stickColor = (stick.open >= stick.close) ? 16711680 : 65280;
-
-     onTick((dt) => {
-         console.log(stick.open, stick.x, stickHeight)
-    })
+    const stickWidth = 15;
+    const stickHeight = computed(() => (stick.open > stick.close) ? stick.open - stick.close : stick.close - stick.open);
+    const stickColor = computed(() => (stick.open < stick.close) ? 16711680 : 65280);
 
     function onDrawCandleStick(someRect) {
-        someRect.beginFill(stickColor);
-        someRect.drawRect(0, stick.y - stick.open, stickWidth, 20);
+        someRect.clear()
+        someRect.beginFill(stickColor.value, 0.5);
+        someRect.drawRect(0, stick.y - stick.open, stickWidth, stickHeight.value);
         someRect.endFill();
     }
 
     function onDrawWicks(realPath) {
-        realPath.lineStyle(2, stickColor, 1);
-        realPath.moveTo(stickWidth / 2, -stick.oWick);
-        realPath.lineTo(stickWidth / 2, stickHeight + stick.cWick);
+        const w = stickWidth / 2;
+        realPath.clear()
+        realPath.lineStyle(2, stickColor.value, 0.5);
+        realPath.moveTo(w, -stick.oWick);
+        realPath.lineTo(w, 0);
+        realPath.moveTo(w, stickHeight.value);
+        realPath.lineTo(w, stickHeight.value + stick.cWick);
     }
 </script>
 <template>
