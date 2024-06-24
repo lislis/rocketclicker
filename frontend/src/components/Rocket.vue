@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 
 const store = useClickStore();
-const { resetCandlesticks, getCandlesticks } = storeToRefs(store)
+const { getCandlesticks, getUsers } = storeToRefs(store)
 
 const socket = inject('socket');
 
@@ -23,7 +23,7 @@ const gravity = 0.4
 const friction = 0.1
 
 const w = window.innerWidth;
-const columnWidth = 25;
+const columnWidth = 55;
 const columns = Math.floor(w / columnWidth);
 const rocketCol = ref(1);
 const prevRocketCol = ref(1);
@@ -38,12 +38,13 @@ const prevRocketCol = ref(1);
 
     velocity.value += gravity * dt
 
+    store.updateLatestCandlestick({close: y.value});
     rocketCol.value = Math.floor(x.value / columns);
 })
 
  function jump() {
-    velocity.value = -6
-    velocityX.value = 1
+    velocity.value = -4
+    velocityX.value = 0.5
  }
 
  socket.on('new-click', () => {
@@ -58,7 +59,7 @@ const prevRocketCol = ref(1);
         let candlestick = { id: rocketCol.value,
                             x: x.value, y: y.value, 
                             open: y.value, close: y.value, 
-                            oWick: Math.floor(Math.random() * 20), cWick: Math.floor(Math.random() * 20)};
+                            oWick: Math.floor(Math.random() * 50), cWick: Math.floor(Math.random() * 50)};
        // console.log(candlestick)
         store.addCandlestick(candlestick);
     }

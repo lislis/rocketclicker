@@ -29,6 +29,9 @@ export const useClickStore = defineStore('clicks', {
     },
     getCandlesticks: (state) => {
       return state.candlesticks;
+    },
+    getCandlestickByIndex: (state) => {
+      return (index) => state.candlesticks[index]
     }
   },
   actions: {
@@ -78,11 +81,20 @@ export const useClickStore = defineStore('clicks', {
       let index = this.users.findIndex(x => x._id === user._id);
       this.users.splice(index, 1);
     },
+    updateLatestCandlestick(newData) {
+      if (this.candlesticks.length) {
+        let old = this.candlesticks[this.candlesticks.length -1]
+        Object.assign(old, newData);
+      }
+    },
     addCandlestick(stick) {
+      console.log(this.candlesticks)
       this.candlesticks.push(stick);
     },
     resetCandlesticks() {
-      this.candlesticks = [];
+      console.log(this.candlesticks)
+      this.candlesticks = 0;
+      console.log(this.candlesticks)
     }
   }
 
