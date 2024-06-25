@@ -98,8 +98,8 @@ whenever(
         <BG :x="bgDistance2" :y="state.bg.y" 
             :scale="state.bg.scale" :texture="state.bg.texture" />
 
-        <Skyline :x="cityCoords.x" :y="cityCoords.y" :scale="cityCoords.scale" />
-        <Skyline :x="cityCoords2.x" :y="cityCoords2.y" :scale="cityCoords2.scale" />
+        <!-- <Skyline :x="cityCoords.x" :y="cityCoords.y" :scale="cityCoords.scale" />
+        <Skyline :x="cityCoords2.x" :y="cityCoords2.y" :scale="cityCoords2.scale" /> -->
 
         <!-- <text x="40" y="30"
               :style="{ fill: 'white' }">{{state.blurp}}</text> -->

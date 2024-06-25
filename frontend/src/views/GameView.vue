@@ -5,11 +5,14 @@ import { reactive, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 import Loop from '@/components/Loop.vue'
-import Waiting from '@/components/Waiting.vue'
+//import Waiting from '@/components/Waiting.vue'
 import ClickHistory from '@/components/ClickHistory.vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const store = useClickStore();
 const { getGame, getClicks } = storeToRefs(store)
+
+const router = useRouter();
 
 const width = window.innerWidth;
 const height = window.outerHeight;
@@ -27,6 +30,12 @@ const images = {
     bitcoin: '/textures/bitcoin.png',
 }
 
+onTick(() => {
+    //console.log(getGame.value.level)
+})
+
+
+
 </script>
 <template>
     <ClickHistory :clicks="getClicks" />
@@ -43,10 +52,7 @@ const images = {
             </template>
             <!-- component with nested async dependencies -->
             <template #default="{ textures }">
-                <Waiting v-if="!getGame" />
-                <template v-else>
-                    <Loop />
-                </template>
+                <Loop v-if="getGame" />    
             </template>
         </Loader>
     </Application>

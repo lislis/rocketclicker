@@ -88,10 +88,13 @@ export const useClickStore = defineStore('clicks', {
       }
     },
     addCandlestick(stick) {
-      console.log(this.candlesticks)
+      //console.log(this.candlesticks)
       this.candlesticks.push(stick);
     },
     resetCandlesticks() {
+      this.candlesticks.push(stick);
+      Object.assign(basicRecords, recordResult.data);
+
       console.log(this.candlesticks)
       this.candlesticks = 0;
       console.log(this.candlesticks)

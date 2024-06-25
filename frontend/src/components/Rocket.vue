@@ -44,7 +44,7 @@ const prevRocketCol = ref(1);
 
  function jump() {
     velocity.value = -4
-    velocityX.value = 0.5
+    velocityX.value = 0.65
  }
 
  socket.on('new-click', () => {

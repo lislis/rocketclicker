@@ -1,28 +1,28 @@
 <script setup>
- import { storeToRefs } from 'pinia'
- import { useClickStore } from '@/stores/click'
- import { inject } from 'vue'
- import { wrappedFetch } from '@/utils';
- import Loader from '@/components/Loader.vue';
- import { sound } from '@pixi/sound';
+import { storeToRefs } from 'pinia'
+import { useClickStore } from '@/stores/click'
+import { inject } from 'vue'
+import { wrappedFetch } from '@/utils';
+import Loader from '@/components/Loader.vue';
+import { sound } from '@pixi/sound';
 
- const store = useClickStore();
- const { me, myClicks, getGame } = storeToRefs(store)
- const { addMyClick } = store
- const apiEndpoint = inject('apiEndpoint')
+const store = useClickStore();
+const { me, myClicks, getGame } = storeToRefs(store)
+const { addMyClick } = store
+const apiEndpoint = inject('apiEndpoint')
 
- sound.add('pickupCoin', '/sounds/pickupCoin.wav');
+sound.add('pickupCoin', '/sounds/pickupCoin.wav');
 
- function countingClicks() {
-     wrappedFetch(`${apiEndpoint}/clicks`,
-                  'POST',
-                  JSON.stringify({ by: me.value._id, username: me.value.name }))
-         .then(d => d.json())
-         .then(d => {
-            sound.play('pickupCoin');
-            addMyClick();
-         })
- }
+function countingClicks() {
+    wrappedFetch(`${apiEndpoint}/clicks`,
+                'POST',
+                JSON.stringify({ by: me.value._id, username: me.value.name }))
+        .then(d => d.json())
+        .then(d => {
+        sound.play('pickupCoin');
+        addMyClick();
+        })
+}
 </script>
 <template>
     <main class="userface" v-if="getGame">

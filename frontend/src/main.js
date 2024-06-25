@@ -11,7 +11,7 @@ import io from 'socket.io-client';
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
+
 
 if (process.env.NODE_ENV === 'production') {
   app.provide('apiEndpoint', `/api`);
@@ -24,6 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   app.provide('socket', socket);
 }
 
+app.use(router)
 
 
 app.mount('#app')
