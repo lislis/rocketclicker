@@ -11,7 +11,11 @@ const { me, myClicks, getGame } = storeToRefs(store)
 const { addMyClick } = store
 const apiEndpoint = inject('apiEndpoint')
 
-sound.add('pickupCoin', '/sounds/pickupCoin.wav');
+const sounds = ['pickup1', 'pickup2', 'pickup3', 'pickup4'];
+
+sounds.forEach(element => {
+    sound.add(element, `/sounds/${element}.wav`);
+});
 
 function countingClicks() {
     wrappedFetch(`${apiEndpoint}/clicks`,
@@ -19,7 +23,8 @@ function countingClicks() {
                 JSON.stringify({ by: me.value._id, username: me.value.name }))
         .then(d => d.json())
         .then(d => {
-        sound.play('pickupCoin');
+        // play random sound
+        sound.play(sounds[Math.floor(Math.random() * sounds.length)]);
         addMyClick();
         })
 }
