@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 
 const router = createRouter({
@@ -22,9 +22,15 @@ const router = createRouter({
       component: () => import('@/views/LevelView.vue')
     },
     {
-      path: '/game',
+      path: '/level', redirect: '/level/1'
+    },
+    {
+      path: '/game/:level',
       name: 'game',
       component: () => import('@/views/GameView.vue')
+    },
+    {
+      path: '/game', redirect: '/game/1'
     },
     {
       path: '/end',
@@ -40,19 +46,24 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  const store = useClickStore();
-  if (to.name === 'game' || to.name === 'level') {
-    if (store.getGame === undefined || store.getGame === null) {
-      console.log('redirect')
-      next({ name: 'waiting' })
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   const store = useClickStore();
+//   const { getGame } = storeToRefs(store)
+//   console.log(typeof getGame.value == 'object')
+
+//   if (to.name === 'game' || to.name === 'level') {
+//     if (getGame.value === undefined 
+//       || getGame.value === null 
+//       || !Object.keys(getGame.value).includes('level')) {
+//       console.log('redirect')
+//       next({ name: 'waiting' })
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// })
 
 
 export default router

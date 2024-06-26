@@ -22,8 +22,8 @@ onTick((dt) => {
 
 // returning to game 
 whenever(
-    () => timer.value > 1200,
-    () => router.push({name: 'game'})
+    () => timer.value > 500,
+    () => router.push({name: 'game', params: { level: route.params.level }})
 )
 
 // when game is being stopped
@@ -32,7 +32,7 @@ whenever(
     () => router.push({name: 'waiting'})
 )
 
-cannon(20)
+cannon(7)
 </script>
 
 <template>
@@ -53,6 +53,7 @@ cannon(20)
     height: 4em;
     color: white;
     animation: titleanim infinite 1s ease alternate;
+    font-weight: 600;
 }
 .bg {
     background-image: url(/textures/background-stars2.png);

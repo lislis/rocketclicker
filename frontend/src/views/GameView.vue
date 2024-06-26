@@ -26,15 +26,17 @@ const images = {
     headlines: '/textures/headlines.png',
     rocketFire: '/textures/rocket2-fire.png',
     rocketEmpty: '/textures/rocket2.png',
-    skyline: '/textures/skyline.png',
     bitcoin: '/textures/bitcoin.png',
 }
 
-onTick(() => {
-    //console.log(getGame.value.level)
-})
+if (getGame.value === undefined || getGame.value === null) {
+    router.push({name: 'waiting'})
+}
 
-
+whenever(
+    () => getGame.value === undefined || getGame.value === null, 
+    () => router.push({name: 'waiting'})
+)
 
 </script>
 <template>

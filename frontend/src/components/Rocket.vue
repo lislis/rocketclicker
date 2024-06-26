@@ -43,7 +43,7 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-    velocity.value = -4
+    velocity.value = -2
     velocityX.value = 0.65
  }
 

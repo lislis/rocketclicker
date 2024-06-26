@@ -14,9 +14,11 @@ import BG from '@/components/BG.vue'
 import Skyline from '@/components/Skyline.vue'
 import CandlestickList from '@/components/CandlestickList.vue';
 
-const router = useRouter()
-sound.add('yay', '/sounds/yay.wav');
+const router = useRouter();
+const route = useRoute();
 const store = useClickStore();
+sound.add('yay', '/sounds/yay.wav');
+
 
 function distanceBetweenTwoPoints(p1, p2) {
     const a = p1.x - p2.x;
@@ -29,30 +31,20 @@ function levelup() {
     if (Object.keys(levels).length < level.value) {
         router.push({ name: 'video'})
     } else {
-        state = reactive(levels[level.value]);
-        moonCoords.x = window.innerWidth - state.moon.x;
-        moonCoords.y = state.moon.y;
-        bgDistance.value = 0;
-        bgDistance2.value = state.bg.width;
-        cityCoords.scale = state.skyline.scale;
-        cityCoords.y = state.skyline.y;
-        cityCoords.x = state.skyline.x;
-        cityCoords2.scale = state.skyline.scale;
-        cityCoords2.y = state.skyline.y;
-        cityCoords2.x = state.skyline.width;
-        store.resetCandlesticks();
+        //moonCoords.x = window.innerWidth - state.moon.x;
+        //moonCoords.y = state.moon.y;
+
+        store.resetCandlesticks();  
+        router.push({ name: 'level', params: { level: level.value}})
     }
 }
 
-
-const level = ref(1);
+const level = ref(parseInt(route.params.level, 10));
 let state = reactive(levels[level.value]);
 const distance = ref(0);
 const bgDistance = ref(0);
 const bgDistance2 = ref(state.bg.width);
 const moonCoords = reactive({ x: window.innerWidth - state.moon.x, y: state.moon.y, rotate: 0})
-const cityCoords = reactive({ x: state.skyline.x, y: state.skyline.y, scale: state.skyline.scale })
-const cityCoords2 = reactive({ x: state.skyline.width, y: state.skyline.y, scale: state.skyline.scale })
 
 onTick((dt) => {
     distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
@@ -63,21 +55,11 @@ onTick((dt) => {
     bgDistance.value -= bg_dx;
     bgDistance2.value -= bg_dx;
 
-    const bg_city = dt * 2.8;
-    cityCoords.x -= bg_city;
-    cityCoords2.x -= bg_city;
-
     if (bgDistance.value <= -state.bg.width) {
         bgDistance.value += state.bg.width * 2;
     }
     if (bgDistance2.value <= -state.bg.width) {
         bgDistance2.value += state.bg.width * 2;
-    }
-    if (cityCoords.x <= -state.skyline.width) {
-        cityCoords.x += state.skyline.width * 2;
-    }
-    if (cityCoords2.x <= -state.skyline.width) {
-        cityCoords2.x += state.skyline.width * 2;
     }
 })
 
