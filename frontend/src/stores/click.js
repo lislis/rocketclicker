@@ -71,8 +71,10 @@ export const useClickStore = defineStore('clicks', {
     rmGame() {
       this.game = null;
     },
-    updateGame(game) {
-      this.game = game;
+    updateGame(mewGame) {
+      console.log(this.game, mewGame)
+      Object.assign(this.game, mewGame);
+      console.log(this.game, mewGame)
     },
     addUser(user) {
       this.users.push(user);
@@ -92,12 +94,9 @@ export const useClickStore = defineStore('clicks', {
       this.candlesticks.push(stick);
     },
     resetCandlesticks() {
-      //this.candlesticks.push(stick);
-      //Object.assign(basicRecords, recordResult.data);
-
-      console.log(this.candlesticks)
+      //console.log(this.candlesticks)
       this.candlesticks = [];
-      console.log(this.candlesticks)
+      //console.log(this.candlesticks)
     }
   }
 

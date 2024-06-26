@@ -31,9 +31,10 @@ function countingClicks() {
 </script>
 <template>
     <main class="userface" v-if="getGame">
-        <div class="clickme" @click="countingClicks()">
+        <div  v-if="getGame.active" class="clickme" @click="countingClicks()">
             <button><span>Click!</span></button>
         </div>
+        <div v-else class="clickdone">Geschafft!</div>
         <div class="click-stats">Du bist <strong>{{me.name}}</strong>.</div>
         <div class="click-stats">Du hast <strong>{{myClicks}}</strong> Clicks beigetragen.</div>
     </main>
@@ -56,6 +57,9 @@ function countingClicks() {
     text-align: center;
     font-variant: small-caps;
     margin-bottom: 1rem;
+}
+.clickdone {
+    font-size: 3rem;
 }
 .clickme button {
     -webkit-user-select: none;
@@ -93,7 +97,7 @@ function countingClicks() {
     margin: auto;
     border-radius: 50%;
     font-size: 2rem;
-    line-height: 6;
+    line-height: 48vw;
     text-shadow: -1px -1px 5px #ffffff3d, -1px 1px 10px #ffffff3d, 1px -1px 10px #ffffff3d, 1px 1px 10px #ffffff3d
 }
 

@@ -12,11 +12,10 @@ const { getGame } = storeToRefs(store)
 
 const route = useRoute()
 const router = useRouter()
-
 const timer = ref(0);
 
 onTick((dt) => {
-    console.log(timer.value)
+    //console.log(timer.value)
     timer.value += dt;
 })
 

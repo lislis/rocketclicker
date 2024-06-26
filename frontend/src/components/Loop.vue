@@ -31,8 +31,6 @@ function levelup() {
     if (Object.keys(levels).length < level.value) {
         router.push({ name: 'video'})
     } else {
-        //moonCoords.x = window.innerWidth - state.moon.x;
-        //moonCoords.y = state.moon.y;
 
         store.resetCandlesticks();  
         router.push({ name: 'level', params: { level: level.value}})

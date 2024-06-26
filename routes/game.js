@@ -22,17 +22,15 @@ router.delete('/', async (req, res, next) => {
   await Game.findOneAndDelete({});
   await Click.deleteMany({});
   req.app.ws.emit('delete-all-clicks');
-  //const g = await Game.findOneAndDelete({_id: req.params.gameId });
   req.app.ws.emit('delete-game');
   res.setHeader('Content-Type', 'application/json');
   return res.json({ message: "all deleted"});
 });
 
-
 router.put('/:gameId', async (req, res, next) => {
   const g = await Game.findOneAndUpdate({ _id: req.params.gameId },
                                         req.body,
-                                        { returnNewDocument: true });
+                                        { new: true });
   req.app.ws.emit('update-game', { message: g });
   res.setHeader('Content-Type', 'application/json');
   return res.json(g);
