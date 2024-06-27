@@ -23,7 +23,7 @@
 
 <template>
     <video autoplay muted>
-        <source src="/video/liftoff-reversed-cut.mp4" type="video/mp4" />
+        <source src="/video/liftoff-reversed.mp4" type="video/mp4" />
     </video>
 </template>
 <style scoped>
