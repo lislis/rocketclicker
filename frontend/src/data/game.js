@@ -1,7 +1,7 @@
 export const levels = {
   1: {
     rocket: { x: 0, y: 650 },
-    moon: { x: 140, y: 150, scale: 0.28 , texture: 'moon' }, // 180 150
+    moon: { x: 200, y: 200, scale: 0.28 , texture: 'moon' }, // 180 150
     distance: 150.0,
     bg: {x: 0, y: 0, scale: 1, width: 2000, texture: 'whitepaper' }, //1 2000
     blurp: "To the Moon!",
