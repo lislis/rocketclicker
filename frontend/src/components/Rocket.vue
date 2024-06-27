@@ -19,7 +19,7 @@ const y = useModel(props, 'y')
 
 const velocity = ref(-6)
 const velocityX = ref(1)
-const gravity = 0.4
+const gravity = 0.2
 const friction = 0.1
 
 const w = window.innerWidth;
@@ -29,7 +29,7 @@ const rocketCol = ref(1);
 const prevRocketCol = ref(1);
 
  const texture = computed(() => {
-     return velocity.value < -2 ? 'rocketFire' : 'rocketEmpty';
+     return velocity.value < -0.6 ? 'rocketFire' : 'rocketEmpty';
  })
  
  const remove = onTick((dt) => {
@@ -43,7 +43,7 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-    velocity.value = -1
+    velocity.value = -1.4
     velocityX.value = 0.65
  }
 

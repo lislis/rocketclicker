@@ -21,7 +21,7 @@ onTick((dt) => {
 
 // returning to game 
 whenever(
-    () => timer.value > 500,
+    () => timer.value > 400,
     () => router.push({name: 'game', params: { level: route.params.level }})
 )
 
@@ -31,7 +31,7 @@ whenever(
     () => router.push({name: 'waiting'})
 )
 
-cannon(7)
+cannon(5)
 </script>
 
 <template>
