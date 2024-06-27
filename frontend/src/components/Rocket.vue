@@ -19,7 +19,7 @@ const y = useModel(props, 'y')
 
 const velocity = ref(-6)
 const velocityX = ref(1)
-const gravity = 0.2
+const gravity = 0.1
 const friction = 0.1
 
 const w = window.innerWidth;
@@ -43,7 +43,8 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-    velocity.value = -1.4
+    velocity.value = -0.8
+
     velocityX.value = 0.65
  }
 
