@@ -65,7 +65,7 @@ whenever(
     () => distance.value < state.distance,
     () => {
         sound.play('yay');
-        cannon(1)
+        //cannon(1)
         levelup()
     }
 )
@@ -78,15 +78,10 @@ whenever(
         <BG :x="bgDistance2" :y="state.bg.y" 
             :scale="state.bg.scale" :texture="state.bg.texture" />
 
-        <!-- <Skyline :x="cityCoords.x" :y="cityCoords.y" :scale="cityCoords.scale" />
-        <Skyline :x="cityCoords2.x" :y="cityCoords2.y" :scale="cityCoords2.scale" /> -->
-
-        <!-- <text x="40" y="30"
-              :style="{ fill: 'white' }">{{state.blurp}}</text> -->
-
         <CandlestickList />
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" v-model:texture="state.moon.texture" />
         <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
+       
     </container>
 </template>

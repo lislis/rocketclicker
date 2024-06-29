@@ -41,3 +41,9 @@ The deployment assumes the built frontend to be served as static files by Expres
 To prepare this build the frontend with `$ npm run build`. I just checked the built files into git for convenience.
 
 If you want to try and separate backend and frontend feel free to mess around with the addresses. No guarantees given.
+
+## Assets
+
+`/end` screen uses footage from [Apollo 17 Liftoff](https://www.youtube.com/watch?v=9HQfauGJaTs) and [Crypto to the moon by Leo Moreno](https://www.youtube.com/watch?v=Bke8vvZSEMg)
+
+Other sounds made by Maren <3

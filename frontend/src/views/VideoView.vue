@@ -11,19 +11,22 @@
 
     const apiEndpoint = inject('apiEndpoint')
 
-    sound.add('cheers', 'sounds/cheers.wav')
+    sound.add('crypto', 'sounds/crypto-to-the-moon-min.mp3')
 
-    sound.play('cheers')
+    sound.play('crypto')
     cannon(20)
 
-    wrappedFetch(`${apiEndpoint}/games/${getGame.value._id}`, 'PUT', JSON.stringify({active: false}))
+    if (getGame.value) {
+        wrappedFetch(`${apiEndpoint}/games/${getGame.value._id}`, 'PUT', JSON.stringify({active: false}))
             .then(d => d.json())
             .then(d => null)
+    }
+   
 </script>
 
 <template>
     <video autoplay muted>
-        <source src="/video/liftoff-reversed.mp4" type="video/mp4" />
+        <source src="/video/output2.mp4" type="video/mp4" />
     </video>
 </template>
 <style scoped>
