@@ -2,6 +2,8 @@
 
 Click to the moon!
 
+**[Anleitung für Technik!](FOH.md)**
+
 
 ![qr code](public/qr.png)
 
