@@ -28,9 +28,6 @@ Wenn die Rakete fest steckt, dann kannst du:
 
     - [/](https://rocketclicker.onrender.com/)
     - [/waiting](https://rocketclicker.onrender.com/waiting)
-    - [/game/1](https://rocketclicker.onrender.com/game/1)
-    - [/game/1](https://rocketclicker.onrender.com/game/1)
-    - [/game/1](https://rocketclicker.onrender.com/game/1)
     - [/level/1](https://rocketclicker.onrender.com/level/1)
     - [/game/1](https://rocketclicker.onrender.com/game/1)
     - [/level/2](https://rocketclicker.onrender.com/level/2)
