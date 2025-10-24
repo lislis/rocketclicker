@@ -24,6 +24,10 @@ Click to the moon!
 
 <img width="918" alt="Screenshot 2024-06-18 at 17 04 31" src="https://github.com/lislis/rocketclicker/assets/1006478/98931bdc-af44-46c1-b636-5898a9bffd14">
 
+- *NEW* the admin page now also has a slider for live and manually adjusting the thrust of the rocket. If you have a lot of participants, go for a smaller value. If you have very few participants, got for a larger value.
+
+<img width="444" height="156" alt="Screenshot 2025-10-24 at 11 17 36" src="https://github.com/user-attachments/assets/8241621c-8d1c-48a9-b9af-211653f8a91b" />
+
 
 
 ## Setup
