@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 
 const store = useClickStore();
-const { getCandlesticks, getUsers } = storeToRefs(store)
+ const { getCandlesticks, getUsers, getJumpVal } = storeToRefs(store)
 
 const socket = inject('socket');
 
@@ -15,7 +15,8 @@ const props = defineProps(['x', 'y']);
 const emit = defineEmits(['jump']);
 
 const x = useModel(props, 'x')
-const y = useModel(props, 'y')
+ const y = useModel(props, 'y')
+ const jumpVal = getJumpVal
 
 const velocity = ref(-6)
 const velocityX = ref(1)
@@ -31,7 +32,7 @@ const prevRocketCol = ref(1);
  const texture = computed(() => {
      return velocity.value < -0.6 ? 'rocketFire' : 'rocketEmpty';
  })
- 
+
  const remove = onTick((dt) => {
     y.value += velocity.value * dt
     x.value += velocityX.value * dt
@@ -43,9 +44,10 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-    velocity.value = -0.7
-
-    velocityX.value = 0.65
+     let val = jumpVal.value * -1;
+     //console.log("jump with ", val)
+     velocity.value = val;
+     velocityX.value = 0.65
  }
 
  socket.on('new-click', () => {
@@ -58,8 +60,8 @@ const prevRocketCol = ref(1);
     () => {
         prevRocketCol.value = rocketCol.value;
         let candlestick = { id: rocketCol.value,
-                            x: x.value, y: y.value, 
-                            open: y.value, close: y.value, 
+                            x: x.value, y: y.value,
+                            open: y.value, close: y.value,
                             oWick: Math.floor(Math.random() * 50), cWick: Math.floor(Math.random() * 50)};
        // console.log(candlestick)
         store.addCandlestick(candlestick);
