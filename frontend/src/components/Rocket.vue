@@ -7,11 +7,11 @@ import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 
 const store = useClickStore();
- const { getCandlesticks, getUsers, getGame, getJumpVal } = storeToRefs(store)
+ const { getCandlesticks, getUsers, getJumpVal } = storeToRefs(store)
 
 const socket = inject('socket');
 
-const props = defineProps(['x', 'y', 'jumpVal']);
+const props = defineProps(['x', 'y']);
 const emit = defineEmits(['jump']);
 
 const x = useModel(props, 'x')
