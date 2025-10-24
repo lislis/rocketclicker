@@ -1,14 +1,16 @@
 <script setup>
  import { useClickStore } from '@/stores/click'
  import { storeToRefs } from 'pinia'
- import { inject } from 'vue'
+ import { inject, ref, toRaw } from 'vue'
  import { wrappedFetch } from '@/utils';
 
  const store = useClickStore();
- const { getGame, getUsers, getClicks, me } = storeToRefs(store)
+ const { getGame, getUsers, getClicks, me, getJumpVal } = storeToRefs(store)
  const { newGame, rmGame } = store
 
  const apiEndpoint = inject('apiEndpoint')
+
+ const intermitJump = ref(getGame.value.jump_value)
 
 
  function startGame() {
@@ -23,6 +25,20 @@
          .then(d => rmGame())
  }
 
+ function updateJumpVal(ev) {
+     let body = { jump_value: ev.target.value }
+     console.log(body)
+     wrappedFetch(`${apiEndpoint}/games/${getGame.value._id}`, 'PATCH', JSON.stringify(body))
+         .then(d => d.json())
+            .then(d => {
+
+                getGame.value.jump_value = d.jump_value
+                intermitJump.value = d.jump_value
+             console.log(ev.target.value, d.jump_value)
+         })
+     //console.log(ev.target.value, getGame.value.jump_value)
+ }
+
 </script>
 <template>
     <div class="admin-wrapper">
@@ -35,6 +51,13 @@
             <div>
                 <button type="button" @click="startGame">Start game</button>
                 <button type="button" v-if="getGame" @click="stopGame">Stop game</button>
+
+            </div>
+            <div >
+                <hr class="spacer">
+                <h3>Rocket jump value</h3>
+                <input :value="intermitJump" type="range" min="0.5" max="5" step="0.2" @change="updateJumpVal"/>
+                <p>{{intermitJump}}</p>
             </div>
         </section>
         <section class="clicks">
@@ -53,6 +76,10 @@
     </div>
 </template>
 <style scoped>
+ .spacer {
+     margin-top: 2em;
+     margin-bottom: 1em;
+ }
  .admin-wrapper {
      padding: 1em;
      display: grid;

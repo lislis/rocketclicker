@@ -24,6 +24,9 @@ export const useClickStore = defineStore('clicks', {
     getGame: (state) => {
       return state.game;
     },
+    getJumpVal: (state) => {
+      return state.game.jump_value;
+    },
     getMyClicks: (state) => {
       return state.myClicks;
     },

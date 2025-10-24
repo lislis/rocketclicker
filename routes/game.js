@@ -27,6 +27,18 @@ router.delete('/', async (req, res, next) => {
   return res.json({ message: "all deleted"});
 });
 
+
+router.patch('/:gameId', async (req, res, next) => {
+  const g = await Game.findOneAndUpdate({ _id: req.params.gameId },
+                                        req.body,
+                                        { new: true });
+  req.app.ws.emit('update-game', { message: g });
+  res.setHeader('Content-Type', 'application/json');
+  return res.json(g);
+});
+
+
+
 router.put('/:gameId', async (req, res, next) => {
   const g = await Game.findOneAndUpdate({ _id: req.params.gameId },
                                         req.body,

@@ -31,7 +31,7 @@ const prevRocketCol = ref(1);
  const texture = computed(() => {
      return velocity.value < -0.6 ? 'rocketFire' : 'rocketEmpty';
  })
- 
+
  const remove = onTick((dt) => {
     y.value += velocity.value * dt
     x.value += velocityX.value * dt
@@ -43,7 +43,8 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-    velocity.value = -0.7
+     //velocity.value = -0.7
+     velocity.value = -2.0
 
     velocityX.value = 0.65
  }
@@ -58,8 +59,8 @@ const prevRocketCol = ref(1);
     () => {
         prevRocketCol.value = rocketCol.value;
         let candlestick = { id: rocketCol.value,
-                            x: x.value, y: y.value, 
-                            open: y.value, close: y.value, 
+                            x: x.value, y: y.value,
+                            open: y.value, close: y.value,
                             oWick: Math.floor(Math.random() * 50), cWick: Math.floor(Math.random() * 50)};
        // console.log(candlestick)
         store.addCandlestick(candlestick);
