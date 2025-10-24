@@ -17,6 +17,7 @@ import CandlestickList from '@/components/CandlestickList.vue';
 const router = useRouter();
 const route = useRoute();
 const store = useClickStore();
+
 sound.add('yay', '/sounds/yay.wav');
 
 
@@ -32,7 +33,7 @@ function levelup() {
         router.push({ name: 'video'})
     } else {
 
-        store.resetCandlesticks();  
+        store.resetCandlesticks();
         router.push({ name: 'level', params: { level: level.value}})
     }
 }
@@ -48,7 +49,7 @@ onTick((dt) => {
     distance.value = distanceBetweenTwoPoints(state.rocket, moonCoords);
 
     moonCoords.rotate += 0.003 * dt;
-    
+
     const bg_dx = dt * 0.99;
     bgDistance.value -= bg_dx;
     bgDistance2.value -= bg_dx;
@@ -73,15 +74,16 @@ whenever(
 </script>
 <template>
     <container>
-        <BG :x="bgDistance" :y="state.bg.y" 
+        <BG :x="bgDistance" :y="state.bg.y"
             :scale="state.bg.scale" :texture="state.bg.texture" />
-        <BG :x="bgDistance2" :y="state.bg.y" 
+        <BG :x="bgDistance2" :y="state.bg.y"
             :scale="state.bg.scale" :texture="state.bg.texture" />
 
         <CandlestickList />
 
         <Moon v-model:x="moonCoords.x" v-model:y="moonCoords.y" v-model:scale="state.moon.scale" v-model:rotate="moonCoords.rotate" v-model:texture="state.moon.texture" />
-        <Rocket v-model:x="state.rocket.x" v-model:y="state.rocket.y" />
-       
+        <Rocket v-model:x="state.rocket.x"
+                v-model:y="state.rocket.y" />
+
     </container>
 </template>

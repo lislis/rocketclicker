@@ -7,15 +7,16 @@ import { storeToRefs } from 'pinia'
 import { useClickStore } from '@/stores/click'
 
 const store = useClickStore();
-const { getCandlesticks, getUsers } = storeToRefs(store)
+ const { getCandlesticks, getUsers, getGame, getJumpVal } = storeToRefs(store)
 
 const socket = inject('socket');
 
-const props = defineProps(['x', 'y']);
+const props = defineProps(['x', 'y', 'jumpVal']);
 const emit = defineEmits(['jump']);
 
 const x = useModel(props, 'x')
-const y = useModel(props, 'y')
+ const y = useModel(props, 'y')
+ const jumpVal = getJumpVal
 
 const velocity = ref(-6)
 const velocityX = ref(1)
@@ -43,10 +44,10 @@ const prevRocketCol = ref(1);
 })
 
  function jump() {
-     //velocity.value = -0.7
-     velocity.value = -2.0
-
-    velocityX.value = 0.65
+     let val = jumpVal.value * -1;
+     //console.log("jump with ", val)
+     velocity.value = val;
+     velocityX.value = 0.65
  }
 
  socket.on('new-click', () => {

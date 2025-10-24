@@ -10,7 +10,7 @@
 
  const apiEndpoint = inject('apiEndpoint')
 
- const intermitJump = ref(getGame.value.jump_value)
+ const intermitJump = ref(toRaw(getJumpVal.value))
 
 
  function startGame() {
@@ -56,7 +56,11 @@
             <div >
                 <hr class="spacer">
                 <h3>Rocket jump value</h3>
-                <input :value="intermitJump" type="range" min="0.5" max="5" step="0.2" @change="updateJumpVal"/>
+                <input :value="intermitJump"
+                       type="range"
+                       min="0.5" max="5" step="0.1"
+                       @change="updateJumpVal"
+                       class="range" />
                 <p>{{intermitJump}}</p>
             </div>
         </section>
@@ -76,6 +80,9 @@
     </div>
 </template>
 <style scoped>
+ .range {
+     width: 100%;
+ }
  .spacer {
      margin-top: 2em;
      margin-bottom: 1em;
