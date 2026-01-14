@@ -31,7 +31,6 @@
      wrappedFetch(`${apiEndpoint}/games/${getGame.value._id}`, 'PATCH', JSON.stringify(body))
          .then(d => d.json())
             .then(d => {
-
                 getGame.value.jump_value = d.jump_value
                 intermitJump.value = d.jump_value
              console.log(ev.target.value, d.jump_value)
@@ -53,7 +52,7 @@
                 <button type="button" v-if="getGame" @click="stopGame">Stop game</button>
 
             </div>
-            <div >
+            <div v-if="getGame && getGame.jump_value">
                 <hr class="spacer">
                 <h3>Rocket jump value</h3>
                 <input :value="intermitJump"
