@@ -55,12 +55,12 @@
             <div v-if="getGame && getGame.jump_value">
                 <hr class="spacer">
                 <h3>Rocket jump value</h3>
-                <input :value="intermitJump"
+                <input :value="getGame.jump_value"
                        type="range"
                        min="0.5" max="5" step="0.1"
                        @change="updateJumpVal"
                        class="range" />
-                <p>{{intermitJump}}</p>
+                <p>{{getGame.jump_value}}</p>
             </div>
         </section>
         <section class="clicks">
