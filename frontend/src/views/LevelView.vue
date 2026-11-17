@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { cannon } from '@/data/particle.js'
 import { storeToRefs } from 'pinia'
@@ -7,19 +7,23 @@ import { useClickStore } from '@/stores/click'
 import { useEventListener, whenever } from '@vueuse/core'
 import { onTick } from "vue3-pixi";
 
-const store = useClickStore();
-const { getGame } = storeToRefs(store)
+ const store = useClickStore();
+ const { getGame } = storeToRefs(store)
 
 const route = useRoute()
 const router = useRouter()
 const timer = ref(0);
+
+const apiEndpoint = inject('apiEndpoint')
+ 
+fetch(`${apiEndpoint}/clicks/deleteallclicks`, {method: "DELETE"}).then((d) => console.log("all clicks cleared"))
 
 onTick((dt) => {
     //console.log(timer.value)
     timer.value += dt;
 })
 
-// returning to game 
+// returning to game
 whenever(
     () => timer.value > 300,
     () => router.push({name: 'game', params: { level: route.params.level }})
@@ -27,7 +31,7 @@ whenever(
 
 // when game is being stopped
 whenever(
-    () => getGame.value === undefined || getGame.value === null, 
+    () => getGame.value === undefined || getGame.value === null,
     () => router.push({name: 'waiting'})
 )
 
@@ -46,7 +50,7 @@ cannon(3)
     position: absolute;
     top: 0;
     bottom: 0;
-    margin: auto;    
+    margin: auto;
     left: 0;
     right: 0;
     height: 4em;
